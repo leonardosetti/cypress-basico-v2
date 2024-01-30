@@ -1,0 +1,14 @@
+describe("Search Engine Duck Duck Go", () => {
+  const searchTerm = "cypress.io";
+
+  beforeEach(() => {
+    cy.intercept("GET", `**?q=${searchTerm}**`).as("getSearchResults");
+    cy.visit("https://duckduckgo.com");
+    cy.get('input[type="text"]').as("searchField").should("be.visible");
+  });
+
+  it("Type and hit ENTER key", () => {
+    cy.get("@searchField").type(`${searchTerm}{enter}`);
+    cy.wait("@getSearchResults");
+  });
+});
