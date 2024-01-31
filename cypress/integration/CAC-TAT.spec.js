@@ -1,25 +1,16 @@
 // CAC-TAT.spec.js created with Cypress
 
-describe('Treinamento Cypress: TAT-CAC (Nível básico)', function () {
+describe('Treinamento Cypress: TAT-CAC (Nível básico)', () => {
   // Determinar acesso da página de referência a cada novo teste
   beforeEach(() => {
-    cy.visit('./src/index.html'); // realiza acesso à Página para realização dos testes
+    //    cy.visit('./src/index.html'); // realiza acesso à Página local para realização dos testes
+    cy.visit('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html');
   });
-  it('Verificar Título da Página', function () {
+  it('Verificar Título da Página', () => {
     cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT'); // valida o título da Página
   });
 
-  /* // exemplo:
-  it("Validar entrada de dados em campo do tipo Texto", function{
-    cy
-      .get('input[type="text"]') // seleciona um elemento web
-      .should('be.visible') // determina que o elemento está presente/visível
-  .type('Texto de entrada') // realiza uma entrada de dados do tipo texto
-      .should('have.value', 'Texto de entrada') // faz o assertion (asserção) do dado no elemento web
-  })
-  */
-
-  it('Preenche os campos obrigatórios e envia o formulário com sucesso', function () {
+  it('Preenche os campos obrigatórios e envia o formulário com sucesso', () => {
     // Preenchimento dos campos obrigatórios:
     // Este teste utiliza o recurso de Custom Commands (./support/commands.js)
 
@@ -35,7 +26,7 @@ describe('Treinamento Cypress: TAT-CAC (Nível básico)', function () {
     cy.msgSuccess();
   });
 
-  it('Preenche email inválido e retorna uma mensagem de erro', function () {
+  it('Preenche email inválido e retorna uma mensagem de erro', () => {
     cy.clock();
     cy.wName();
     cy.wSurname();
@@ -48,7 +39,7 @@ describe('Treinamento Cypress: TAT-CAC (Nível básico)', function () {
     cy.msgErro();
   });
 
-  it('Preenche campo telefone com valores não-numéricos mantendo o campo vazio', function () {
+  it('Preenche campo telefone com valores não-numéricos mantendo o campo vazio', () => {
     cy.clock();
     cy.wName();
     cy.wSurname();
@@ -61,7 +52,7 @@ describe('Treinamento Cypress: TAT-CAC (Nível básico)', function () {
     cy.msgSuccess();
   });
 
-  it('Marca a opção de Telefone sem preencher o campo Telefone (obrigatório)', function () {
+  it('Marca a opção de Telefone sem preencher o campo Telefone (obrigatório)', () => {
     cy.clock();
     cy.wName();
     cy.wSurname();
@@ -84,7 +75,7 @@ describe('Treinamento Cypress: TAT-CAC (Nível básico)', function () {
     cy.msgSuccess();
   });
 
-  it('Envia formulário vazio e retorna mensagem de erro', function () {
+  it('Envia formulário vazio e retorna mensagem de erro', () => {
     cy.clock();
     cy.hitSubmit();
     cy.msgErro();
