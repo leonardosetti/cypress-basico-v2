@@ -99,9 +99,13 @@ Cypress.Commands.add("fillMandatorySubmitForm", () => {
 Cypress.Commands.add("msgErro", function () {
   cy.get(".error").should("be.visible");
   cy.contains("span > strong", "Valide os campos obrigatórios!");
+  cy.tick(3000);
+  cy.get(".error").should("not.be.visible");
 });
 
 Cypress.Commands.add("msgSuccess", function () {
   cy.get(".success").should("be.visible");
   cy.contains("span > strong", "Mensagem enviada com sucesso.");
+  cy.tick(3000);
+  cy.get(".success").should("not.be.visible");
 });
