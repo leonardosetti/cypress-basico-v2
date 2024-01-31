@@ -1,40 +1,41 @@
 const timeForward3s = 3000;
+const longText = Cypress._.repeat('Fill with words. ', 15);
 
-Cypress.Commands.add("wName", () => {
+Cypress.Commands.add('wName', () => {
   cy.get('input[name="firstName"]')
-    .should("be.visible")
+    .should('be.visible')
     /*
     .type(Cypress.env("name")) // use apenas localmente
     .should("have.value", Cypress.env("name")); // use apenas localmente
     */
-    .type("Carolyn")
-    .should("have.value", "Carolyn");
+    .type('Carolyn')
+    .should('have.value', 'Carolyn');
 });
 
-Cypress.Commands.add("wSurname", () => {
+Cypress.Commands.add('wSurname', () => {
   cy.get('input[name="lastName"]')
-    .should("be.visible")
+    .should('be.visible')
     /*
     .type(Cypress.env("surname")) // use apenas localmente
     .should("have.value", Cypress.env("surname")); // use apenas localmente
     */
-    .type("Mackenzie")
-    .should("have.value", "Mackenzie");
+    .type('Mackenzie')
+    .should('have.value', 'Mackenzie');
 });
 
-Cypress.Commands.add("wEmail", () => {
+Cypress.Commands.add('wEmail', () => {
   cy.get('input[id="email"]')
-    .should("be.visible")
+    .should('be.visible')
     /*
     .type(Cypress.env("email")) // use apenas localmente
     .should("have.value", Cypress.env("email")) // use apenas localmente
     */
-    .type("heather.blake@trust.me")
-    .should("have.value", "heather.blake@trust.me");
+    .type('heather.blake@trust.me')
+    .should('have.value', 'heather.blake@trust.me');
 });
 
 // Telefone não é um campo obrigatório desde que o check de telefone esteja vazio
-Cypress.Commands.add("wPhone", () => {
+Cypress.Commands.add('wPhone', () => {
   /* // use apenas localmente
   cy.get('input[id="phone-checkbox"]')
     .invoke("prop", "checked")
@@ -53,61 +54,51 @@ Cypress.Commands.add("wPhone", () => {
   */
 
   cy.get('input[id="phone-checkbox"]')
-    .invoke("prop", "checked")
+    .invoke('prop', 'checked')
     .then((isChecked) => {
       if (isChecked) {
         cy.get('input[id="phone"]')
-          .should("be.visible")
-          .type("21997487965")
-          .should("have.value", "21997487965");
+          .should('be.visible')
+          .type('21997487965')
+          .should('have.value', '21997487965');
       } else {
         cy.get('input[id="phone"]')
-          .should("be.visible")
+          .should('be.visible')
           .clear()
-          .should("have.value", "");
+          .should('have.value', '');
       }
     });
 });
 
-Cypress.Commands.add("wTxtarea", () => {
+Cypress.Commands.add('wTxtarea', () => {
   cy.get('textarea[name="open-text-area"')
-    .should("be.visible")
+    .should('be.visible')
     /*
     .type(Cypress.env("txtarea"), { delay: 0 }) // use apenas localmente
     .should("have.value", Cypress.env("txtarea")); // use apenas localmente
     */
-    .type("Texto hard-coded para TextArea Element", { delay: 0 })
-    .should("have.value", "Texto hard-coded para TextArea Element");
+    // .type(longText, { delay: 0 })
+    .invoke('val', longText)
+    .should('have.value', longText);
 });
 //Envio do form:
-Cypress.Commands.add("hitSubmit", () => {
+Cypress.Commands.add('hitSubmit', () => {
   cy.get('button[type="submit"]')
-    .should("be.visible")
-    .contains("Enviar")
+    .should('be.visible')
+    .contains('Enviar')
     .click();
 });
 
-Cypress.Commands.add("fillMandatorySubmitForm", () => {
-  // Preenchimento dos campos obrigatórios:
-
-  cy.wName();
-  cy.wSurname();
-  cy.wEmail();
-  cy.wPhone();
-  cy.wTxtarea();
-  cy.hitSubmit();
+Cypress.Commands.add('msgErro', function () {
+  cy.get('.error').should('be.visible');
+  cy.contains('span > strong', 'Valide os campos obrigatórios!');
+  cy.tick(timeForward3s);
+  cy.get('.error').should('not.be.visible');
 });
 
-Cypress.Commands.add("msgErro", function () {
-  cy.get(".error").should("be.visible");
-  cy.contains("span > strong", "Valide os campos obrigatórios!");
+Cypress.Commands.add('msgSuccess', function () {
+  cy.get('.success').should('be.visible');
+  cy.contains('span > strong', 'Mensagem enviada com sucesso.');
   cy.tick(timeForward3s);
-  cy.get(".error").should("not.be.visible");
-});
-
-Cypress.Commands.add("msgSuccess", function () {
-  cy.get(".success").should("be.visible");
-  cy.contains("span > strong", "Mensagem enviada com sucesso.");
-  cy.tick(timeForward3s);
-  cy.get(".success").should("not.be.visible");
+  cy.get('.success').should('not.be.visible');
 });
