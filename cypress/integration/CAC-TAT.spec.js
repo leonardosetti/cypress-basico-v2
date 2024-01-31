@@ -182,5 +182,20 @@ describe("Testes básicos CAC-TAT", function () {
       .each(($text) => {
         cy.wrap($text).should("be.visible");
       });
+
+    it.only("Usando clock para validação", () => {
+      cy.clock();
+
+      cy.wName();
+      cy.wSurname();
+      cy.wEmail();
+      cy.wPhone();
+      cy.wTxtarea();
+      cy.hitSubmit();
+
+      cy.get(".success").should("be.visible");
+      cy.tick(3000);
+      cy.get(".success").should("not.be.visible");
+    });
   });
 });
