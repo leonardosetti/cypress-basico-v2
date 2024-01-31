@@ -19,7 +19,7 @@ describe("Testes básicos CAC-TAT", function () {
   })
   */
 
-  it.only("Preenche os campos obrigatórios e envia o formulário", function () {
+  it("Preenche os campos obrigatórios e envia o formulário", function () {
     // Preenchimento dos campos obrigatórios:
 
     cy.clock();
@@ -32,7 +32,7 @@ describe("Testes básicos CAC-TAT", function () {
     cy.msgSuccess();
   });
 
-  it.only("Preenche email inválido", function () {
+  it("Preenche email inválido", function () {
     cy.clock();
     cy.wName();
     cy.wSurname();
@@ -45,7 +45,7 @@ describe("Testes básicos CAC-TAT", function () {
     cy.msgErro();
   });
 
-  it.only("Campo telefone vazio para valores não-numéricos", function () {
+  it("Campo telefone vazio para valores não-numéricos", function () {
     cy.clock();
     cy.wName();
     cy.wSurname();
@@ -58,7 +58,7 @@ describe("Testes básicos CAC-TAT", function () {
     cy.msgSuccess();
   });
 
-  it.only("Telefone obrigatório não preenchido", function () {
+  it("Telefone obrigatório não preenchido", function () {
     cy.clock();
     cy.wName();
     cy.wSurname();
@@ -70,7 +70,7 @@ describe("Testes básicos CAC-TAT", function () {
     cy.msgErro();
   });
 
-  it.only("Check Telefone e preenche campo Telefone", () => {
+  it("Check Telefone e preenche campo Telefone", () => {
     cy.clock();
     cy.wName();
     cy.wSurname();
@@ -82,7 +82,7 @@ describe("Testes básicos CAC-TAT", function () {
     cy.msgSuccess();
   });
 
-  it.only("Mensagem de erro para formulário vazio", function () {
+  it("Mensagem de erro para formulário vazio", function () {
     cy.clock();
     cy.hitSubmit();
     cy.msgErro();
