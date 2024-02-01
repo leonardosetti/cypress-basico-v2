@@ -181,7 +181,7 @@ describe('Treinamento Cypress: TAT-CAC (Nível básico)', () => {
       });
   });
 
-  it.skip('Realiza upload de múltiplos arquivos usando Drag and Drop', () => {
+  it('Realiza upload de múltiplos arquivos usando Drag and Drop', () => {
     cy.get('input[type="file"]#file-upload')
       .should('not.have.value')
       .selectFile(
